@@ -290,6 +290,36 @@ user-select: none;         /* La propiedad estándar */
     animation: leafPopIn 0.5s ease-out forwards;
 }
 
+/* --- ESTILOS PARA EL FONDO DE ESTRELLAS --- */
+
+/* El contenedor que cubrirá toda la pantalla */
+#stars {
+    position: fixed; /* Lo fija a la ventana */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Lo pone detrás de todo tu contenido */
+    pointer-events: none; /* Evita que interfiera con los clics */
+}
+
+/* El estilo de cada estrella individual */
+.star {
+    position: absolute;
+    background-color: #ffffff; /* Color blanco */
+    border-radius: 50%; /* Para que sean círculos */
+    animation-name: twinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+/* La animación que hace que las estrellas parpadeen */
+@keyframes twinkle {
+    0%   { opacity: 0; transform: scale(0.5); }
+    50%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.5); }
+}
+
 
 /* --- ESTILOS RESPONSIVE PARA CELULARES (SOLO TEXTO Y NOMBRES) - CORREGIDO --- */
 @media (max-width: 768px) {
