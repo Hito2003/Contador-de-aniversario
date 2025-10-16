@@ -1,0 +1,390 @@
+/* --- ESTILOS GENERALES Y DE FONDO --- */
+body {
+    margin: 0;
+    font-family: 'Lora', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0a192f, #1e3a5f);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 40px;
+    box-sizing: border-box;
+    -webkit-user-select: none; /* Para Chrome, Safari, Opera */
+-moz-user-select: none;    /* Para Firefox */
+-ms-user-select: none;     /* Para Internet Explorer/Edge */
+user-select: none;         /* La propiedad estándar */
+}
+
+/* --- ESTILOS PARA LOS NOMBRES DENTRO DEL ÁRBOL --- */
+.names-container {
+    position: absolute; /* Permite posicionarlo con precisión */
+    z-index: 20;         /* Lo coloca encima de las hojas y los gatitos */
+    
+    /* === ¡AJUSTA ESTOS VALORES PARA LA POSICIÓN PERFECTA! === */
+    top: 22%;           /* Distancia desde arriba (menos % = más arriba) */
+    left: 27%;          /* Lo centra horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino para el centrado */
+
+    text-align: center; /* Centra los nombres */
+    pointer-events: none; /* Permite hacer clic a través de los nombres */
+}
+
+.names-container div {
+    font-family: 'Pacifico', cursive; /* Una fuente cursiva y romántica */
+    font-size: 2.2em;      /* Tamaño de la letra (ajusta si es necesario) */
+    color: #ffffff;          /* Color blanco para que resalte */
+    /* Sombra sutil para que sea más legible */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+}
+
+/* Estilo para el "&" o corazón en medio */
+.name2 {
+    font-size: 1.5em; /* Un poco más pequeño */
+}
+
+/* --- CONTENEDORES DE LAS 4 ESQUINAS --- */
+.top-message {
+
+    
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Cambiado a 'center' para mejor estabilidad */
+    text-align: center;
+    height: 45vh;      /* <-- ESTA ES LA LÍNEA CLAVE */
+}
+
+/* --- ESTILO PARA LA IMAGEN DEBAJO DE LA FRASE --- */
+.message-image {
+    max-width: 25%; /* Ocupa un 60% del ancho disponible en ese contenedor */
+    height: auto;   /* Mantiene la proporción de la imagen */
+    margin-top: 10px; /* Un poco de espacio entre la frase y la imagen */
+    margin-bottom: 20px;
+    border-radius: 10px; /* Bordes ligeramente redondeados (opcional) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave (opcional) */
+    
+}
+
+.heart-tree-container {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.bottom-message {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* --- ESTILOS PARA LOS TEXTOS Y EL CONTADOR --- */
+.top-message p {
+    font-size: 1.5em;
+    font-weight: 300;
+    color: #ffffff;
+    margin-top: 100px; /* baja el mensaje en pantallas de escritorio */
+}
+
+    .bottom-message p {
+    font-size: 1.3em;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding-top: 50px; /* separación ajustada entre la imagen y la frase */
+
+}
+
+#countdown {
+    font-size: 2em;
+    font-weight: bold;
+    color: #FFD700;
+    margin-top: 8px; /* acercamos el contador a la frase */
+}
+
+/* --- ESTILO PARA EL SEGUNDO CONTADOR --- */
+#countdown2 {
+    position: fixed;     /* Lo fija a la ventana del navegador */
+    bottom: 0;           /* Lo pega a la parte inferior */
+    left: 0;             /* Lo alinea a la izquierda */
+    width: 100%;         /* Hace que ocupe todo el ancho */
+    font-weight: bold;
+    
+    color: #FFD700;        /* Letra blanca */
+    text-align: center;  /* Texto centrado */
+    padding: 10px 0;     /* Espaciado interno (10px arriba/abajo, 0 a los lados) */
+    font-size: 1.2em;
+    z-index: 100;        /* Se asegura de que esté por encima de todo */
+    box-sizing: border-box; /* Para que el padding no afecte el ancho total */
+}
+
+/* --- ESTILOS PARA LAS IMÁGENES (ÁRBOL Y GATOS) --- */
+.heart-tree {
+    width: 400px; /* Ajusta el tamaño de tu imagen de árbol */
+    height: auto;
+    position: absolute;
+    bottom: 0px; /* bajamos el tronco un poco más */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.love-bears {
+    width: 140px;
+    height: auto;
+    position: absolute;
+    bottom: 50px; /* Ajusta para que quede bien sobre tu imagen de árbol */
+    left: 55%;   /* Ajusta para que quede bien sobre tu imagen de árbol */
+    z-index: 3;
+    transform: rotate(8deg);
+}
+
+/* --- ANIMACIONES DE CORAZONES (SIN CAMBIOS) --- */
+#hearts-background {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
+}
+.heart {
+    position: absolute; background-color: #ff99cc; width: 20px; height: 20px; transform: rotate(-45deg); animation: fall linear infinite; opacity: 0;
+}
+.heart::before, .heart::after {
+    content: ''; position: absolute; width: 20px; height: 20px; background-color: inherit; border-radius: 50%;
+}
+.heart::before { top: -10px; left: 0; }
+.heart::after { left: 10px; top: 0; }
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(110vh) rotate(-45deg); opacity: 0; }
+}
+.exploded-heart {
+    position: absolute; width: 15px; height: 15px; background-color: #ff8c00; transform: rotate(-45deg); animation: explode 0.8s forwards ease-out; opacity: 0; pointer-events: none; z-index: 100;
+}
+.exploded-heart::before, .exploded-heart::after {
+    content: ''; position: absolute; width: 15px; height: 15px; background-color: inherit; border-radius: 50%;
+}
+.exploded-heart::before { top: -7.5px; left: 0; }
+.exploded-heart::after { left: 7.5px; top: 0; }
+@keyframes explode {
+    0% { transform: translate(0, 0) scale(1) rotate(-45deg); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(0) rotate(-45deg); opacity: 0; }
+}
+
+/* --- ESTILOS PARA LAS "HOJAS" QUE CAEN DEL ÁRBOL --- */
+.tree-heart {
+ position: absolute; background-color: #ffcccc; width: 25px; height: 25px; transform: rotate(-45deg); opacity: 1; pointer-events: none; z-index: 5; /* <-- ¡ESTE ES EL CAMBIO! */
+}
+.tree-heart::before, .tree-heart::after {
+    content: ''; position: absolute; width: 25px; height: 25px; background-color: inherit; border-radius: 50%;
+}
+.tree-heart::before { top: -12.5px; left: 0; }
+.tree-heart::after { left: 12.5px; top: 0; }
+@keyframes leafFall {
+    0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; } 100% { transform: translate(calc(var(--rand-x) * 1px), calc(var(--rand-y) * 1px)) rotate(calc(-45deg + var(--rand-rot) * 1deg)); opacity: 0; }
+}
+.falling-leaf {
+    animation-name: leafFall; animation-timing-function: ease-out; animation-fill-mode: forwards;
+}
+
+
+/* --- ANIMACIÓN DE BALANCEO SUTIL --- */
+@keyframes gentleSway {
+  0% { transform: rotate(0deg) translateX(-50%); }
+  50% { transform: rotate(0.5deg) translateX(-50%); }
+  100% { transform: rotate(0deg) translateX(-50%); }
+}
+
+@keyframes gentleBreathing {
+  0% { transform: scale(1) rotate(8deg); }
+  50% { transform: scale(1.03) rotate(8deg); }
+  100% { transform: scale(1) rotate(8deg); }
+}
+
+/* Aplicamos la animación al árbol */
+.heart-tree {
+    /* ...tus otros estilos... */
+    /* El transform-origin asegura que rote desde la base */
+    transform-origin: bottom center; 
+    animation: gentleSway 8s ease-in-out infinite;
+}
+
+/* Aplicamos la animación a los gatitos */
+.love-bears {
+    /* ...tus otros estilos... */
+    animation: gentleBreathing 2s ease-in-out infinite;
+}
+
+/* --- ESTILO PARA LAS PARTÍCULAS DE ESTRELLA --- */
+.sparkle {
+    position: absolute;
+    background-color: #FFD700; /* Color dorado, como el contador */
+    border-radius: 50%;
+    pointer-events: none; /* Para que no interfiera con los clics */
+    z-index: 999;
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* --- ANIMACIÓN DE ENTRADA (FADE IN) --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ANIMACIÓN DE ENTRADA (FADE IN) --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ANIMACIÓN PARA LAS HOJAS QUE "FLORECEN" --- */
+@keyframes leafPopIn {
+    from { opacity: 0; transform: scale(0.5) rotate(-45deg); }
+    to { opacity: 1; transform: scale(1) rotate(-45deg); }
+}
+
+/* Aplicamos la animación de entrada a los elementos principales */
+.heart-tree-container {
+    animation: fadeIn 1.5s ease-out forwards;
+}
+
+.top-message {
+    opacity: 0; /* Empiezan invisibles para que la animación funcione */
+    animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+.bottom-message {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 1s forwards;
+}
+
+#countdown2 {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 1.5s forwards;
+}
+
+/* Modificamos las hojas del árbol para que usen la nueva animación */
+.tree-heart {
+    /* ... (mantén los otros estilos de .tree-heart que ya tienes) ... */
+    position: absolute;
+    background-color: #ffcccc;
+    width: 25px;
+    height: 25px;
+    opacity: 0; /* MUY IMPORTANTE: Hacemos que empiecen invisibles */
+    pointer-events: none;
+    z-index: 5;
+    /* Aplicamos la animación de "florecer" */
+    animation: leafPopIn 0.5s ease-out forwards;
+}
+
+
+/* --- ESTILOS RESPONSIVE PARA CELULARES (SOLO TEXTO Y NOMBRES) - CORREGIDO --- */
+@media (max-width: 768px) {
+
+    /* 1. Ocultamos TODAS las imágenes (árbol, gatitos, hojas y la foto personal) */
+    .heart-tree-container,
+    .tree-heart,
+    .message-image {
+        display: none;
+    }
+
+    /* 2. Hacemos visible el contenedor de los nombres */
+    .names-container {
+        display: block; /* Aseguramos que sea visible */
+    }
+
+    /* 3. Reorganizamos el cuerpo en 4 filas para los 4 bloques */
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto; /* 5 filas para cada elemento */
+        padding: 20px;
+        overflow: visible;
+        align-content: center;
+        min-height: 100vh; /* Ocupa al menos toda la altura de la pantalla */
+        height: auto;
+    }
+
+    /* 4. Posicionamos los elementos en la nueva estructura */
+    .top-message {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        height: auto;
+        justify-content: flex-end;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .names-container {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        position: relative;
+        top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 420px;
+        padding: 25px 0; /* Aumentamos el espacio para que respire */
+        font-size: 1.2em;
+        text-align: center;
+        margin: 0 auto;
+        left: auto !important;
+        transform: none !important;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bottom-message {
+        grid-column: 1 / 2;
+        grid-row: 4 / 5;
+        height: auto;
+        justify-content: flex-start;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    #countdown2 {
+        grid-column: 1 / 2;
+        grid-row: 5 / 6; /* Lo colocamos en la última fila */
+        position: relative; /* Quitamos el position: fixed */
+        bottom: auto;       /* Reseteamos sus estilos de posición */
+        left: auto;
+        padding: 25px 0;    /* Le damos su propio espacio */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+    }
+    /* 5. Ajustamos tamaños de fuente para que todo se vea bien */
+    .top-message p, .bottom-message p {
+        font-size: 1.2em;
+    }
+
+    #countdown {
+        font-size: 1.5em;
+    }
+    
+    #countdown2 {
+        font-size: 1em;
+        
+    }
+}
